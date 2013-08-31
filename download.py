@@ -36,6 +36,14 @@ def expand_url(raw_url):
     return [raw_url.replace(old, n) for n in new]
 
 
+def guess_encoding(data):
+    rx = re.compile(br'<meta\s+[^>]*charset="?(.+?)[;"]', re.IGNORECASE|re.DOTALL)
+    if rx.search(data):
+        return rx.search(data).group(1).decode('utf-8')
+    else:
+        return 'utf-8'
+
+
 def sanitize_body(text, url):
     # Convert relative links to uh real ones whatsitcalled
     baseurl = '/'.join(url.split('/')[:-1]) + '/'
@@ -55,7 +63,9 @@ def download_page(url, entries, n, maxn):
         raise Exception('No matching config entry')
     print('Downloading page {}/{}...'.format(n+1,maxn), end='')
     with contextlib.closing(urllib.request.urlopen(url)) as u:
-        page = u.read().decode('utf-8', errors="replace")
+        rawdata = u.read()
+        enc = guess_encoding(rawdata)
+        page = rawdata.decode(enc, errors="replace")
     print('...done')
     def find(target):
         return re.search(settings[target], page, re.DOTALL|re.IGNORECASE)
