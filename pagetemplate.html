@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>{title}</title>
+	<style type="text/css">
+	body {{
+		margin: 0px;
+		background-color: #bbc;
+		font-size: 9pt;
+		line-height: 19px;
+		font-family:Verdana,Arial,Helvetica,sans-serif!important;
+	}}
+	#main {{
+		padding: 40px;
+		background-color: #fff;
+		width: 600px;
+	}}
+	a {{
+		color: #119;
+		text-decoration: none;
+	}}
+	.controls {{
+		margin: 20px;
+		font-weight: bold;
+		text-align: center;
+	}}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<a href="{url}"><h1>{title}</h1></a>
+		by <a href="{author_url}"><strong>{author_name}</strong></a>
+		{controls}
+		{body}
+		{controls}
+	</div>
+</body>
+</html>
