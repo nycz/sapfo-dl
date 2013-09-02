@@ -37,7 +37,7 @@ def expand_url(raw_url):
 
 
 def guess_encoding(data):
-    rx = re.compile(br'<meta\s+[^>]*charset="?(.+?)[;"]', re.IGNORECASE|re.DOTALL)
+    rx = re.compile(br'<meta\s+[^>]*charset=["\']?(.+?)[;"\']', re.IGNORECASE|re.DOTALL)
     if rx.search(data):
         return rx.search(data).group(1).decode('utf-8')
     else:
